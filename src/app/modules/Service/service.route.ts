@@ -16,6 +16,8 @@ router.post(
   serviceControllers.createService,
 )
 
+// !Get ALL Services Route
+router.get('/', serviceControllers.getAllServices)
 // !Get A Service Route
 router.get('/:id', serviceControllers.getSingleService)
 

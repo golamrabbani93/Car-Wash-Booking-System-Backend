@@ -17,20 +17,49 @@ const createService = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
+// !Get All Services
+const getAllServices = catchAsync(async (req: Request, res: Response) => {
+  const result = await allServices.getAllServicesFromDB()
+  if (result.length > 0) {
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Services retrieved successfully',
+      data: result,
+    })
+  } else {
+    sendResponse(res, {
+      statusCode: httpStatus.NOT_FOUND,
+      success: false,
+      message: 'No Data Found',
+      data: [],
+    })
+  }
+})
+
 // !Get A Service
 const getSingleService = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params
   const result = await allServices.getSingleServiceFromDB(id)
-
-  sendResponse(res, {
-    success: true,
-    statusCode: httpStatus.OK,
-    message: 'Service retrieved successfully',
-    data: result,
-  })
+  if (result) {
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Service retrieved successfully',
+      data: result,
+    })
+  } else {
+    sendResponse(res, {
+      statusCode: httpStatus.NOT_FOUND,
+      success: false,
+      message: 'No Data Found',
+      data: [],
+    })
+  }
 })
 
 export const serviceControllers = {
   createService,
+  getAllServices,
   getSingleService,
 }
