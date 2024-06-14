@@ -16,4 +16,7 @@ router.post(
   serviceControllers.createService,
 )
 
+// !Get A Service Route
+router.get('/:id', serviceControllers.getSingleService)
+
 export const serviceRoutes = router

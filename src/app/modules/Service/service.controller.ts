@@ -17,6 +17,20 @@ const createService = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
+// !Get A Service
+const getSingleService = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params
+  const result = await allServices.getSingleServiceFromDB(id)
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Service retrieved successfully',
+    data: result,
+  })
+})
+
 export const serviceControllers = {
   createService,
+  getSingleService,
 }
