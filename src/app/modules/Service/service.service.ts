@@ -21,10 +21,17 @@ const getSingleServiceFromDB = async (id: string) => {
 
 // !Update a Service
 
-const updateServiceFromDB = async (id: string, payload: Partial<TService>) => {
+const updateServiceIntoDB = async (id: string, payload: Partial<TService>) => {
   const result = await Service.findByIdAndUpdate(id, payload, {
     new: true,
     runValidators: true,
+  })
+  return result
+}
+
+const deleteServiceFromDB = async (id: string) => {
+  const result = await Service.findByIdAndDelete(id, {
+    new: true,
   })
   return result
 }
@@ -33,5 +40,6 @@ export const allServices = {
   createServiceIntoDB,
   getAllServicesFromDB,
   getSingleServiceFromDB,
-  updateServiceFromDB,
+  updateServiceIntoDB,
+  deleteServiceFromDB,
 }

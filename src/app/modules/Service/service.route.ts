@@ -30,4 +30,7 @@ router.put(
   validateRequest(ServiceValidation.updateServiceValidationSchema),
   serviceControllers.updateService,
 )
+
+// !Delete a Service route
+router.delete('/:id', auth(USER_ROLE.admin), serviceControllers.deleteService)
 export const serviceRoutes = router
