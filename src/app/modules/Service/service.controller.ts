@@ -58,8 +58,31 @@ const getSingleService = catchAsync(async (req: Request, res: Response) => {
   }
 })
 
+// !Upadate Service
+const updateService = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params
+  const serviceData = req.body
+  const result = await allServices.updateServiceFromDB(id, serviceData)
+  if (!result) {
+    sendResponse(res, {
+      statusCode: httpStatus.NOT_FOUND,
+      success: false,
+      message: 'No Data Found',
+      data: [],
+    })
+  } else {
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: 'Service updated successfully',
+      data: result,
+    })
+  }
+})
+
 export const serviceControllers = {
   createService,
   getAllServices,
   getSingleService,
+  updateService,
 }

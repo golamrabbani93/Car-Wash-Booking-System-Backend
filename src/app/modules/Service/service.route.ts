@@ -18,7 +18,16 @@ router.post(
 
 // !Get ALL Services Route
 router.get('/', serviceControllers.getAllServices)
+
 // !Get A Service Route
 router.get('/:id', serviceControllers.getSingleService)
 
+// !Update Service Route
+
+router.put(
+  '/:id',
+  auth(USER_ROLE.admin),
+  validateRequest(ServiceValidation.updateServiceValidationSchema),
+  serviceControllers.updateService,
+)
 export const serviceRoutes = router
