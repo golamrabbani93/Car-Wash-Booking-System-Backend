@@ -3,6 +3,7 @@ import { TSlot } from '../Slot/slot.interface'
 import { Slot } from '../Slot/slot.model'
 import { TService } from './service.interface'
 import { Service } from './service.model'
+import createSlots from './service.utils'
 
 // *Create service and Save In to Databse
 const createServiceIntoDB = async (payload: TService) => {
@@ -41,30 +42,9 @@ const deleteServiceFromDB = async (id: string) => {
 
 // !Create Slots And Save To Databse
 const createSlotsIntoDB = async (payload: TSlot) => {
-  const { service, startTime, date, endTime } = payload
+  const getAllSlots = createSlots(payload)
 
-  const startTimeMinutes = Number(startTime.split(':')[0]) * 60
-  const endTimeMinutes = Number(endTime.split(':')[0]) * 60
-
-  const totalDuration = endTimeMinutes - startTimeMinutes
-
-  const numberOfSlots: (number | undefined)[] = new Array(
-    totalDuration / 60,
-  ).fill(1)
-
-  const newSlots = numberOfSlots.map((slot, index: number) => {
-    return {
-      service,
-      date,
-      startTime:
-        Number(startTime.split(':')[0]) + index < 10
-          ? `0${Number(startTime.split(':')[0]) + index}:00`
-          : `${Number(startTime.split(':')[0]) + index}:00`,
-      endTime: `${Number(startTime.split(':')[0]) + index + 1}:00`,
-    }
-  })
-
-  const result = await Slot.create(newSlots)
+  const result = await Slot.create(getAllSlots)
   return result
 }
 export const allServices = {
