@@ -4,6 +4,7 @@ import { USER_ROLE } from '../User/user.constant'
 import validateRequest from '../../middlewares/validateRequest'
 import { ServiceValidation } from './service.validation'
 import { serviceControllers } from './service.controller'
+import { slotValidation } from '../Slot/slot.validation'
 
 const router = Router()
 
@@ -33,4 +34,12 @@ router.put(
 
 // !Delete a Service route
 router.delete('/:id', auth(USER_ROLE.admin), serviceControllers.deleteService)
+
+// !Create Solts Route
+router.post(
+  '/slots',
+  auth(USER_ROLE.admin),
+  validateRequest(slotValidation.createSlotVlaidationSchema),
+  serviceControllers.createSlots,
+)
 export const serviceRoutes = router
