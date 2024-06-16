@@ -1,9 +1,9 @@
 import { Types } from 'mongoose'
 
 export interface TBooking {
-  customer: Types.ObjectId
-  service: Types.ObjectId
-  slot: Types.ObjectId
+  customerId?: Types.ObjectId
+  serviceId: Types.ObjectId
+  slotId: Types.ObjectId
   vehicleType: string
   vehicleBrand: string
   vehicleModel: string

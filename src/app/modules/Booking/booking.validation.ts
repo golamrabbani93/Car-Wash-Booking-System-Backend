@@ -2,15 +2,11 @@ import { z } from 'zod'
 
 const createBookingvalidationSchema = z.object({
   body: z.object({
-    customer: z.string({
-      invalid_type_error: 'customer id must be string',
-      required_error: 'customer id is required',
-    }),
-    service: z.string({
+    serviceId: z.string({
       invalid_type_error: 'service id must be string',
       required_error: 'service id is required',
     }),
-    slot: z.string({
+    slotId: z.string({
       invalid_type_error: 'slot id must be string',
       required_error: 'slot id is required',
     }),
@@ -37,7 +33,6 @@ const createBookingvalidationSchema = z.object({
   }),
 })
 
-
-export const BookingValidation={
-    createBookingvalidationSchema
+export const BookingValidation = {
+  createBookingvalidationSchema,
 }
