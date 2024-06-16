@@ -34,9 +34,13 @@ const updateServiceIntoDB = async (id: string, payload: Partial<TService>) => {
 }
 
 const deleteServiceFromDB = async (id: string) => {
-  const result = await Service.findByIdAndDelete(id, {
-    new: true,
-  })
+  const result = await Service.findByIdAndUpdate(
+    id,
+    { isDeleted: true },
+    {
+      new: true,
+    },
+  )
   return result
 }
 
