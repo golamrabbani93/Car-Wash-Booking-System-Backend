@@ -19,4 +19,11 @@ router.post(
 // !Get all Bookings Route
 router.get('/', auth(USER_ROLE.admin), bookingController.getAllBookings)
 
+// !Get all Bookings Route
+router.get(
+  '/my-bookings',
+  auth(USER_ROLE.user),
+  bookingController.getAllUserBookings,
+)
+
 export const bookingRoutes = router
