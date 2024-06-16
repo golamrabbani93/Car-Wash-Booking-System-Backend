@@ -9,6 +9,7 @@ import { Server } from 'http'
 let server: Server
 
 const PORT = config.port
+
 const uri = config.database_url
 async function main() {
   try {
