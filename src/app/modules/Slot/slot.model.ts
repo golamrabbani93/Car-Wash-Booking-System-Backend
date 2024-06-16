@@ -6,6 +6,7 @@ const slotSchema = new Schema<TSlot>(
     service: {
       type: mongoose.Schema.ObjectId,
       required: [true, 'Service Id is Required'],
+      ref: 'Service',
     },
     date: {
       type: String,
