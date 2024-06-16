@@ -16,4 +16,7 @@ router.post(
   bookingController.createBooking,
 )
 
+// !Get all Bookings Route
+router.get('/', auth(USER_ROLE.admin), bookingController.getAllBookings)
+
 export const bookingRoutes = router

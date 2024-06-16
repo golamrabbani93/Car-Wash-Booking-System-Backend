@@ -76,6 +76,17 @@ const createBookingIntoDB = async (userData: JwtPayload, payload: TBooking) => {
   }
 }
 
+// !Get all Bookings
+
+const getAllBookingsFromDB = async () => {
+  const result = await Booking.find()
+    .populate('customerId')
+    .populate('serviceId')
+    .populate('slotId')
+
+  return result
+}
 export const bookingServices = {
   createBookingIntoDB,
+  getAllBookingsFromDB,
 }

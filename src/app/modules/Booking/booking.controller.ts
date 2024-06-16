@@ -18,6 +18,28 @@ const createBooking = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
+// !Get All Bookings
+const getAllBookings = catchAsync(async (req: Request, res: Response) => {
+  const result = await bookingServices.getAllBookingsFromDB()
+
+  if (!result.length) {
+    sendResponse(res, {
+      success: false,
+      statusCode: httpStatus.NOT_FOUND,
+      message: 'No Data Found',
+      data: [],
+    })
+  } else {
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: 'All bookings retrieved successfully',
+      data: result,
+    })
+  }
+})
+
 export const bookingController = {
   createBooking,
+  getAllBookings,
 }
